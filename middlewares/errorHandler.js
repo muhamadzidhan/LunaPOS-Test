@@ -17,14 +17,6 @@ const errorHandler = (err, req, res, next) => {
             statusCode = 400
             message = "Failed to post the product"
             break;
-        case "ALREADY_PREMIUM":
-            statusCode = 400
-            message = "You are already a premium member"
-            break;
-        case "BUY_PREMIUM":
-            statusCode = 400
-            message = "You have to buy premium"
-            break;
         case "INVALID":
             statusCode = 401
             message = "Email or Password is INVALID"
@@ -33,13 +25,17 @@ const errorHandler = (err, req, res, next) => {
             statusCode = 401
             message = "Invalid Token"
             break;
+        case "Tax Not Found":
+            statusCode = 404
+            message = "Tax Not Found"
+            break;
+        case "Product Not Found":
+            statusCode = 404
+            message = "Product Not Found"
+            break;
         case "UNAUTHORIZED":
             statusCode = 401
             message = "Login First"
-            break;
-        case "FORBIDDEN":
-            statusCode = 403
-            message = "You don't have permission to access"
             break;
         case "NOT_FOUND":
         case "SequelizeForeignKeyConstraintError":
@@ -52,7 +48,7 @@ const errorHandler = (err, req, res, next) => {
             break;
     }
 
-    res.status(statusCode).json({message})
+    res.status(statusCode).json({ message })
 }
 
-module.exports = {errorHandler}
+module.exports = { errorHandler }
